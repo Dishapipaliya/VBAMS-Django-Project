@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Update Vehicle Details</h4>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'error' %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color: red;">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: red;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+
+                    {% if messages %}
+                    {% for message in messages %}
+                        {% if message.tags == 'success' %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" style="color: red;">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: red;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                    {% endif %}
+
+                    <form class="forms-sample" method="POST" action="{% url 'vehicle_profile_update' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="exampleInputName1" style="color: blue;font-weight: bolder;">Old Vehicle Image</label>
+                            <img src="{{ vehicle.image }}" width="100" height="100">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label style="color: blue;font-weight: bolder;">Vehicle Image</label>
+                            <input type="file" name="vehicle_image" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputName1" style="color: blue;font-weight: bolder;">Registration Number</label>
+                            <input type="text" class="form-control" name="registration_number" value="{{ vehicle.vehicle_register_number }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputName1" style="color: blue;font-weight: bolder;">Model</label>
+                            <input type="text" class="form-control" name="model" value="{{ vehicle.vehicle_model }}">
+                        </div>
+
+                        
+
+                       
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Jio Location</label>
+                            <input type="text" class="form-control" name="{{ vehicle.vehicle_jio_location }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Trip ID</label>
+                            <input type="text" class="form-control" name="{{ vehicle.vehicle_trip_id }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Manufacture</label>
+                            <textarea class="form-control" name="{{ vehicle.vehicle_manufacturer }}" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Engine Number</label>
+                            <input type="text" class="form-control" name="{{ vehicle.vehicle_engine_number }}" required>
+                        </div>
+
+
+        
+
+                    
+
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <button class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

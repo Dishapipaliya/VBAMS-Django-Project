@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-lg-12 stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Manage Vehicle Details</h4>
+
+                    <!-- Display messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Vehicle Table -->
+                    <div class="table-responsive pt-3">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Register Number</th>
+                                    <th>Model</th>
+                                    <th>Manufacturer</th>
+                                    <th>Engine Number</th>
+                                    <th>Trip ID</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for vehicle in vehicles %}
+                                    <tr>
+                                        <td>{{ vehicle.id }}</td>
+                                        <td>{{ vehicle.vehicle_register_number }}</td>
+                                        <td>{{ vehicle.vehicle_model }}</td>
+                                        <td>{{ vehicle.vehicle_manufacturer }}</td>
+                                        <td>{{ vehicle.vehicle_engine_number }}</td>
+                                        <td>{{ vehicle.vehicle_trip_id }}</td>
+                                        <td>
+                                            <a href="{% url 'update_vehicle' vehicle.id %}" class="btn btn-primary btn-sm">Update</a>
+                                            <a href="{% url 'delete_vehicle' vehicle.id %}" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?');">Delete</a>
+                                        </td>
+                                    </tr>
+                                {% empty %}
+                                    <tr>
+                                        <td colspan="7" class="text-center">No vehicles found</td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    {% if vehicles.paginator.num_pages > 1 %}
+                        <div class="pagination" style="padding-left: 20px; padding-bottom: 20px;">
+                            <span class="step-links">
+                                {% if vehicles.has_previous %}
+                                    <a href="?page=1">&laquo; First</a>
+                                    <a href="?page={{ vehicles.previous_page_number }}">Previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ vehicles.number }} of {{ vehicles.paginator.num_pages }}
+                                </span>
+
+                                {% if vehicles.has_next %}
+                                    <a href="?page={{ vehicles.next_page_number }}">Next</a>
+                                    <a href="?page={{ vehicles.paginator.num_pages }}">Last &raquo;</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

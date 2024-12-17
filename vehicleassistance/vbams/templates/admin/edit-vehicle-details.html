@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Update Vehicle Details</h4>
+
+                    <!-- Display messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert" style="color: red;">
+                                {{ message }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="color: red;">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Update Vehicle Form -->
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data" action="{% url 'update_vehicle_details' %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="vehicle_id" style="color: blue; font-weight: bolder;">Vehicle ID</label>
+                            <input type="text" class="form-control" name="vehicle_id" value="{{ vehicle.id }}">
+                            <input type="hidden" class="form-control" name="v_id" value="{{ vehicle.id }}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="old_image" style="color: blue; font-weight: bolder;">Old Image</label>
+                            <img src="profile_pics.image.url" width="100" height="100">
+
+                        </div>
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">New Image</label>
+                            <input type="file" name="image" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="register_number" style="color: blue; font-weight: bolder;">Vehicle Register Number</label>
+                            <input type="text" class="form-control" name="vehicle_register_number" value="{{ vehicle.vehicle_register_number }}" required>
+                        </div>
+
+                        
+                            
+                            <div class="form-group">
+                                <label for="vehicle_model" style="color: blue; font-weight: bolder;">Vehicle Model</label>
+                                <input type="text" class="form-control" name="vehicle_model" value="{{ vehicle.vehicle_model }}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="vehicle_jio_location" style="color: blue; font-weight: bolder;">Vehicle Jio Location</label>
+                                <input type="text" class="form-control" name="vehicle_jio_location" value="{{ vehicle.vehicle_jio_location }}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="vehicle_trip_id" style="color: blue; font-weight: bolder;">Vehicle Trip ID</label>
+                                <input type="text" class="form-control" name="vehicle_trip_id" value="{{ vehicle.vehicle_trip_id }}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="vehicle_manufacturer" style="color: blue; font-weight: bolder;">Vehicle Manufacturer</label>
+                                <input type="text" class="form-control" name="vehicle_manufacturer" value="{{ vehicle.vehicle_manufacturer }}" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="username" style="color: blue; font-weight: bolder;">Username</label>
+                                <input type="text" class="form-control" name="username" value="{{ vehicle.username }}" required >
+                            </div>
+                        
+                            <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                            <button type="reset" class="btn btn-light">Cancel</button>
+                        </form>
+                        
+
+
+            
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

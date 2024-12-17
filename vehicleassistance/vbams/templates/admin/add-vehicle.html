@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="content-wrapper">
+    <div class="row">
+        <div class="col-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Add Vehicle</h4>
+
+                    <!-- Display Error Messages -->
+                    {% if messages %}
+                        {% for message in messages %}
+                            {% if message.tags == 'error' %}
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% elif message.tags == 'success' %}
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    {{ message }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <!-- Add Vehicle Form -->
+                    <form class="forms-sample" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle ID</label>
+                            <input type="text" class="form-control" name="vehicleid" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Profile Picture</label>
+                            <input type="file" name="profile_pic" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Username</label>
+                            <input type="text" class="form-control" name="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Register Number</label>
+                            <input type="text" class="form-control" name="vehicle_reg_num" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Model</label>
+                            <select class="form-control" name="vehicle_model" required>
+                                <option value="">Select a Vehicle Model</option>
+                                <option value="Model1">Toyota - Corolla</option>
+                                <option value="Model2">Ford - F-150</option>
+                                <option value="Model3">Honda - Civic</option>
+                                <option value="Model4">Honda - Accord</option>
+                                <!-- Add more options as needed -->
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Jio Location</label>
+                            <input type="text" class="form-control" name="vehicle_jio_location" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Trip ID</label>
+                            <input type="text" class="form-control" name="vehicle_trip_id" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Manufacture</label>
+                            <textarea class="form-control" name="vehicle_manufecture" rows="3" required></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label style="color: blue; font-weight: bolder;">Vehicle Engine Number</label>
+                            <input type="text" class="form-control" name="vehicle_eng_num" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                        <button type="reset" class="btn btn-light">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
